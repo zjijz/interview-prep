@@ -10,28 +10,20 @@ void printVector(IntVec& vec) {
   std::cout << std::endl;
 }
 
-int binarysearch_first(IntVec& list, int& find, const int& start,
-                 const int& end) {
+int binarysearch_first(IntVec& list, int find, const int start,
+                 const int end) {
+  if (start >= end) return -1;
+
   const int mid = start + (end - start) / 2;
-  int comp = list[mid] - find;
-  if (comp == 0) {
-    if ((end - start) < 1) {
-      return mid;
-    } else {
-      int search = binarysearch_first(list, find, start, mid - 1);
-      return (search == -1) ? mid : search;
-    }
-  } else {
-    if ((end - start) < 1)
-      return -1;
-    else if (comp > 0)
-      return binarysearch_first(list, find, start, mid - 1);
-    else
-      return binarysearch_first(list, find, mid + 1, end);
+  if (list[mid] == find) {
+    const int search = binarysearch_first(list, find, start, mid);
+    return (search == -1) ? mid : search;
   }
+  return (list[mid] > find) ? binarysearch_first(list, find, start, mid)
+                            : binarysearch_first(list, find, mid + 1, end);
 }
 
-int binarysearch_first(IntVec& list, int& find) {
+int binarysearch_first(IntVec& list, int find) {
   return binarysearch_first(list, find, 0, list.size() - 1);
 }
 

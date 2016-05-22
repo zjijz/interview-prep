@@ -10,24 +10,18 @@ void printVector(IntVec& vec) {
   std::cout << std::endl;
 }
 
-int binarysearch(IntVec& list, int& find, const int& start,
-                 const int& end) {
+int binarysearch(IntVec& list, int find, const int start,
+                 const int end) {
+  if (start >= end) return -1;
+
   const int mid = start + (end - start) / 2;
-  int comp = list[mid] - find;
-  if (comp == 0) {
-    return mid;
-  } else {
-    if ((end - start) < 1)
-      return -1;
-    else if (comp > 0)
-      return binarysearch(list, find, start, mid - 1);
-    else
-      return binarysearch(list, find, mid + 1, end);
-  }
+  if (list[mid] == find) return mid;
+  return (list[mid] > find) ? binarysearch(list, find, start, mid)
+                            : binarysearch(list, find, mid + 1, end);
 }
 
 int binarysearch(IntVec& list, int& find) {
-  return binarysearch(list, find, 0, list.size() - 1);
+  return binarysearch(list, find, 0, list.size());
 }
 
 int main(int argc, char* argv[]) {
