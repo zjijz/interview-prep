@@ -27,14 +27,14 @@ void getRange(IntVec& list, int& min, int& max) {
  * As long as the range is less than the size of the list,
  * this is effective. Also, if there a few gaps in the range of numbers.
  *
- * O(n) space
- * O(n) time
+ * O(m) space
+ * O(n or m) time (either the range (m) is longer or the list size is)
  * Three-pass (One-pass gets range)
  */
 void countingsort(IntVec& list) {
   int min = INT_MAX, max = INT_MIN;
-  getRange(list, min, max);
-  IntVec counts(max - min + 1, 0); // O(n)
+  getRange(list, min, max); // O(n)
+  IntVec counts(max - min + 1, 0); // O(m) (m is the range)
 
   for (IntVecIter iter = list.begin(); iter != list.end(); iter++) // O(n)
     counts[*iter]++;
