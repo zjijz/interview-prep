@@ -56,7 +56,7 @@ void printSumArray(bool *S, int rowSize) {
  * Look at S(len(list), sum) for answer
  *
  * Only the ith and (i-1)th values of S need to be kept at any time, so we can
- * store it in O(2n) space.
+ * store it in O(2m) space.
  *
  * This seems to be related to the integer partition function:
  * p(n, k) = p(n - 1, k - 1) + p (n - k, k - 1)
