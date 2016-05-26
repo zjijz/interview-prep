@@ -40,6 +40,9 @@ void printVector(IntVec& vec) {
   std::cout << std::endl;
 }
 
+/*
+ * Overflows if list[head] and list[tail] are too large
+ */
 void swap(IntVec& list, const int head, const int tail) {
   list[head] = list[head] + list[tail];
   list[tail] = list[head] - list[tail];
