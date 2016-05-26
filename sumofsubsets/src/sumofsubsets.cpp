@@ -61,7 +61,7 @@ void printSumArray(bool *S, int rowSize) {
  * This seems to be related to the integer partition function:
  * p(n, k) = p(n - 1, k - 1) + p (n - k, k - 1)
  */
-bool subsetSum(IntVec& list, int sum) {
+bool subsetSum(IntVec& list, const int sum) {
   // Find min / max possible sums
   int min = INT_MAX, max = INT_MIN, minSum = 0, maxSum = 0;
   getMinMaxElements(list, min, max); // O(n)
