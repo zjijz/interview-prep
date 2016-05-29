@@ -36,23 +36,24 @@ bool allVisited(BoolVec& visited) {
  * nodes by doing a recursive call on L - (the cost to get to the neighbor)
  *
  * I believe this creates a tree of roughly depth n, with each node having (n-1)
- * children. I think this corresponds to a O((n-1)^n) runtime, but this
+ * children. I think this corresponds to a O(n^n) runtime, but this
  * varies based on the state of edges.
+ *
+ * BoolVec must be passed by value to prevent cross-path pollution
  */
-bool tsp(IntVecVec& edges, const int L, const int start, BoolVec& visited, int i) {
-  std::cout << "Current: " << i << ", Length: " << L << std::endl;
-
+bool tsp(IntVecVec& edges, const int L, const int start, BoolVec visited,
+         const int i) {
   if (L < 0) return false;
-  if (L == 0) return (i == start) && allVisited(visited);
+  if (allVisited(visited) && (i == start)) return true;
 
-  // Branches n-1 times (sometimes less based on conditions)
-  for (int j = 0; j < edges[i].size(); j++) {
-    visited[i] = true;
-    if ((i != j)
-        && (edges[i][j] != 99999)
+  visited[i] = true;
+  // Branches n times (sometimes less based on conditions)
+  for (int j = 0; j < edges[i].size(); j++)
+    if ((!visited[j] || (j == start)) // Avoid cycles except to go back to start
+        && (i != j) // Disallow cycles of length one to avoid infinite recursion
+        && (edges[i][j] != 99999) // "No path" indicator
         && tsp(edges, L - edges[i][j], start, visited, j))
       return true;
-  }
 
   return false;
 }
