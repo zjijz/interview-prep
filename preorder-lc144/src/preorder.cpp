@@ -1,5 +1,5 @@
 /* Leetcode 144 */
-/* Better than 22ish% */
+/* 0 ms, Better than 22ish% */
 
 /**
  * Definition for a binary tree node.
